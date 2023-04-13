@@ -3,7 +3,7 @@ import java.util.Scanner;
  * Консольный калькулятор
  *
  * Позволяет ввести два дробных числа, с плавающей запятой и действие
- * При вводе некорректного значения в качестве числа, программа завершается
+ * При вводе некорректного значения в качестве числа, программа ввести число еще раз
  * При вводе некорректного значения в качестве действия, программа позволяет ввести действие заново
  * Вывод результата форматирован до четырех знаков после запятой
  *
@@ -47,16 +47,19 @@ public class Base {
 
     public static float enterFloat() {
         float number = 0.0F;
+        boolean i;
+        do {
             try {
-                    number = scanner.nextFloat();
- //               break;
+                i=true;
+                number = scanner.nextFloat();
             } catch (Exception e) {
-                System.out.println("Некорректное число. Завершение программы");
-                System.exit(0);
+                i=false;
+                System.out.println("Некорректное число. Введите число, допустим разделитель дробной части");
             }
 
-        String tail = scanner.nextLine();
+            String tail = scanner.nextLine();
 
+        }while (!i);
         return number;
     }
 
