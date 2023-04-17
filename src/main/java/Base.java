@@ -1,4 +1,7 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
+
+
 /**
  * Консольный калькулятор
  *
@@ -11,87 +14,42 @@ import java.util.Scanner;
  */
 
 public class Base {
-    static Scanner scanner;
 
     public static void main(String[] args) {
-         scanner = new Scanner(System.in);
+        Scanner scanner;
+        scanner = new Scanner(System.in);
 
-        System.out.println("Введите первое число:");
-        float a1 = enterFloat();
-        System.out.println("Введите второе число:");
-        float a2 = enterFloat();
-        System.out.println("Введите действие. Допустимые символы: +,-,*,/");
-        int action = enterAction();
-
-
-        float result = makeAction(a1,a2,action);
-
-
-       System.out.printf("Результат:  %.4f", result);
-        scanner.close();
-    }
-
-    private static float makeAction(float a1, float a2, int action) {
-        switch (action) {
-            case (1):
-                return a1+a2;
-            case (2):
-                return a1-a2;
-            case (3):
-                return a1*a2;
-            case (4):
-                return a1/a2;
-        }
-        return 0;
-    }
-
-    public static float enterFloat() {
-        float number = 0.0F;
-        boolean i;
-        do {
-            try {
-                i=true;
-                number = scanner.nextFloat();
-            } catch (Exception e) {
-                i=false;
-                System.out.println("Некорректное число. Введите число, допустим разделитель дробной части");
-            }
-
-            String tail = scanner.nextLine();
-
-        }while (!i);
-        return number;
-    }
-
-    public static int enterAction() {
-        String actionEnter = scanner.nextLine();
-
-        int action = 0;
-
+        String actionSelect;
         boolean i = false;
+
         do {
-            switch (actionEnter){
-                case ("+"):
-                    action=1;
-                    i=true;
+
+            System.out.println("Что будем делать? 1 - Калькулятор, 2 - Найти самое длинное слово в массиве, 0 - для выхода");
+
+            actionSelect = scanner.nextLine();
+            switch (actionSelect){
+                case ("1"):
+                    Calc.calc();
+                    i=false;
+                    System.out.println("Попробуем еще раз?");
                     break;
-                case ("-"):
-                    action=2;
-                    i=true;
+                case ("2"):
+                    FindMax.findMax();
+                    i=false;
+                    System.out.println("Попробуем еще раз?");
                     break;
-                case ("*"):
-                    action=3;
-                    i=true;
-                    break;
-                case ("/"):
-                    action=4;
+                case ("0"):
+                    System.out.println("Конец программы");
                     i=true;
                     break;
                 default:
-                    System.out.println("Некорректный ввод нужного действия. Допустимые символы: +,-,*,/");
-                    actionEnter = scanner.nextLine();
+                    System.out.println("Некорректный ввод нужного действия. Повторите ввод: 1, 2 или 0 ");
+                    i=false;
             }
+            System.out.println("");
+
         } while (!i);
-        return action;
+        scanner.close();
     }
+
 }
