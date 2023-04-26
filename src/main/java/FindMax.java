@@ -1,5 +1,13 @@
 import java.util.Scanner;
 
+/**
+ * Поиск самого длинного слова в массиве
+ *
+ * Позволяет ввести размерность массива, заполнить его строковыми переменными
+ * Затем находит самое длинное слово, и выводит его на экран
+ *
+ * @author Полина Тревогина
+ */
 public class FindMax {
 
 
@@ -23,23 +31,33 @@ public class FindMax {
             }
 
 
-            int result = findMaxString(mass,size);
+            int maxLength = findMaxLength(mass,size);
 
-            System.out.println("Результат. Самая длинная строка массива:  " + mass[result]);
+            System.out.println("Результат. В массиве найдены следующие строки с макисмальной длиной:  " + maxLength);
+            printMax(mass, maxLength);
+            System.out.println("");
+            System.out.println("--- Конец поиск самого длинного слова ---");
         }
 
-    private static int findMaxString(String[] mass, int size) {
-            int max = 0;
-            int maxSize=0;
+    private static int findMaxLength(String[] mass, int size) {
+            int maxLength=0;
             for (int i=0;i<size;i++){
-                if (mass[i].length()>=maxSize){
-                    maxSize=mass[i].length();
-                    max=i;
+                if (mass[i].length()>maxLength){
+                    maxLength=mass[i].length();
                 }
+
             }
-            return max;
+            return maxLength;
     }
 
+    private static void printMax(String[] mass, int maxLength){
+        for (int i=0;i<mass.length;i++){
+            if (mass[i].length()>=maxLength){
+                System.out.println(mass[i]);
+            }
+
+        }
+    }
 
     public static int enterSize() {
             int number = 0;
